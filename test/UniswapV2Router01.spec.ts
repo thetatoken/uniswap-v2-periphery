@@ -24,7 +24,9 @@ describe('UniswapV2Router{01,02}', () => {
     const provider = new MockProvider({
       hardfork: 'istanbul',
       mnemonic: 'horn horn horn horn horn horn horn horn horn horn horn horn',
-      gasLimit: 9999999
+      gasLimit: 9999999,
+      fork: "http://localhost:18888/rpc",
+      network_id: 366
     })
     const [wallet] = provider.getWallets()
     const loadFixture = createFixtureLoader(provider, [wallet])
@@ -517,8 +519,8 @@ describe('UniswapV2Router{01,02}', () => {
           const receipt = await tx.wait()
           expect(receipt.gasUsed).to.eq(
             {
-              [RouterVersion.UniswapV2Router01]: 138770,
-              [RouterVersion.UniswapV2Router02]: 138770
+              [RouterVersion.UniswapV2Router01]: 108770,
+              [RouterVersion.UniswapV2Router02]: 108770
             }[routerVersion as RouterVersion]
           )
         }).retries(3)
